@@ -99,5 +99,10 @@ namespace LiveDraw
         {
             this.InvokeMainWindow(w => w.ToggleEngaged());
         }
+
+        public void Clear()
+        {
+            this.InvokeMainWindow(w => w.Clear());
+        }
     }
 }

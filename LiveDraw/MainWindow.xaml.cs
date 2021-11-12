@@ -255,6 +255,11 @@ namespace AntFu7.LiveDraw
             this.SetEngaged(!_engaged);
         }
 
+        internal void Clear()
+        {
+            this.AnimatedClear();
+        }
+
         private void SetBrushSize(double s)
         {
             if (MainInkCanvas.EditingMode == InkCanvasEditingMode.EraseByPoint)
@@ -518,12 +523,7 @@ namespace AntFu7.LiveDraw
         {
             collection?.Clear();
         }
-        private void Clear()
-        {
-            MainInkCanvas.Strokes.Clear();
-            ClearHistory();
-        }
-
+       
         private void AnimatedClear()
         {
             var ani = new DoubleAnimation(0, Duration3);
@@ -532,7 +532,9 @@ namespace AntFu7.LiveDraw
         }
         private void ClearAniComplete(object sender, EventArgs e)
         {
-            Clear();
+            MainInkCanvas.Strokes.Clear();
+            ClearHistory();
+
             Display("Cleared");
             MainInkCanvas.BeginAnimation(OpacityProperty, new DoubleAnimation(1, Duration3));
         }

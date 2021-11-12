@@ -44,5 +44,11 @@ namespace LiveDraw.Controllers
         {
             _liveDraw.ToggleEngage();
         }
+
+        [HttpPost("clear")]
+        public void PostClear()
+        {
+            _liveDraw.Clear();
+        }
     }
 }

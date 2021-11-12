@@ -9,5 +9,7 @@
         void PreviousColor();
 
         void ToggleEngage();
+
+        void Clear();
     }
 }

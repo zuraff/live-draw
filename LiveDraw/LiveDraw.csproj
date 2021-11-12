@@ -51,6 +51,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="clear.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="color_next.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
