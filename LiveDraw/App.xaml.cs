@@ -60,6 +60,7 @@ namespace LiveDraw
             app.MapControllers();
 
             var thread = new Thread(() => app.Run());
+            thread.IsBackground = true;
             thread.Start();            
         }
 
