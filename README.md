@@ -1,5 +1,5 @@
 # LiveDraw
-A tool allows you to draw on screen real-time.
+A tool allows you to draw on screen real-time and integrate it with your favourite graphical tab.
 
 ## Why?
 When you need to draw or mark something with presentation, you may use some tools like
@@ -25,11 +25,11 @@ The shortcuts that can be used:
 - [ B ]  Brush mode, [ L ]  Line Mode
 
 ### Downloads
-[Release](https://github.com/antfu/live-draw/releases)
+[Release](https://github.com/zuraff/live-draw/releases)
 
 ### Requirements
 - Windows OS
-- .Net Core 5 x86/x64 
+- .Net Core 6 x86/x64 
 
 ### Features
 - True transparent background (you can draw freely even when you are watching videos).
