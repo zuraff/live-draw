@@ -221,6 +221,20 @@ namespace AntFu7.LiveDraw
             return brush.Color;
         }
 
+        internal void NextColor()
+        {
+            var colorPickers = this.FindChildren<ColorPicker>().ToList();
+            var remaining = colorPickers.SkipWhile(p => !object.ReferenceEquals(p, _selectedColor)).Skip(1);
+            if (remaining.Any())
+            {
+                SetColor(remaining.First());
+            }
+            else
+            {
+                SetColor(colorPickers.First());
+            }
+        }
+
         private void SetBrushSize(double s)
         {
             if (MainInkCanvas.EditingMode == InkCanvasEditingMode.EraseByPoint)

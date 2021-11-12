@@ -16,6 +16,7 @@ namespace LiveDraw
     public interface ILiveDraw
     {
         public string GetSelectedColor();
+        void NextColor();
     }
 
     /// <summary>
@@ -33,6 +34,15 @@ namespace LiveDraw
             });
 
             return color;
+        }
+
+        public void NextColor()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                var window = (AntFu7.LiveDraw.MainWindow)this.MainWindow;
+                window.NextColor();
+            });
         }
 
         protected override void OnStartup(StartupEventArgs e)

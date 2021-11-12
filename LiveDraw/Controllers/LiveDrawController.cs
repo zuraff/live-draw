@@ -21,10 +21,17 @@ namespace LiveDraw.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetColor")]
+        [HttpGet("color")]
         public string GetColor()
         {
             return _liveDraw.GetSelectedColor();
         }
+
+        [HttpPost("color/next")]
+        public void PostColorNext()
+        {
+            _liveDraw.NextColor();
+        }
+
     }
 }
