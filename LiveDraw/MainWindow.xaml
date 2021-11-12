@@ -294,7 +294,7 @@
                                     </local:ActivableButton.RenderTransform>
                                     <Path Data="{DynamicResource IconCloseEye}"/>
                                 </local:ActivableButton>
-                                <local:ActivableButton x:Name="EnableButton" Click="EnableButton_Click" ToolTip="Release/Recover the control of drawing">
+                                <local:ActivableButton x:Name="EngageButton" Click="EngageButton_Click" ToolTip="Grab or release pencil">
                                     <local:ActivableButton.RenderTransform >
                                         <RotateTransform CenterX="16" CenterY="16" Angle="{Binding MinWidth, ElementName=Palette}"/>
                                     </local:ActivableButton.RenderTransform>

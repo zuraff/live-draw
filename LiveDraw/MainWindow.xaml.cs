@@ -78,7 +78,7 @@ namespace AntFu7.LiveDraw
 
                 InitializeComponent();
                 SetColor(DefaultColorPicker);
-                SetEnable(false);
+                SetEngaged(false);
                 SetTopMost(true);
                 SetDetailPanel(true);
                 SetBrushSize(_brushSizes[_brushIndex]);
@@ -97,7 +97,7 @@ namespace AntFu7.LiveDraw
                 Application.Current.Shutdown(0);
             }
         }
-              
+
 
         private void Exit(object sender, EventArgs e)
         {
@@ -144,7 +144,7 @@ namespace AntFu7.LiveDraw
         private bool _inkVisibility = true;
         private bool _displayDetailPanel;
         private bool _eraserMode;
-        private bool _enable;
+        private bool _engaged;
         private readonly int[] _brushSizes = { 3, 5, 8, 13, 20 };
         private int _brushIndex = 1;
         private bool _displayOrientation;
@@ -176,18 +176,18 @@ namespace AntFu7.LiveDraw
             MainInkCanvas.BeginAnimation(OpacityProperty,
                 v ? new DoubleAnimation(0, 1, Duration3) : new DoubleAnimation(1, 0, Duration3));
             HideButton.IsActived = !v;
-            SetEnable(v);
+            SetEngaged(v);
             _inkVisibility = v;
         }
-        private void SetEnable(bool b)
+        private void SetEngaged(bool b)
         {
-            EnableButton.IsActived = !b;
+            EngageButton.IsActived = !b;
             Background = Application.Current.Resources[b ? "FakeTransparent" : "TrueTransparent"] as Brush;
-            _enable = b;
+            _engaged = b;
             MainInkCanvas.UseCustomCursor = false;
 
             //SetTopMost(false);
-            if (_enable == true)
+            if (_engaged == true)
             {
                 LineButton.IsActived = false;
                 EraserButton.IsActived = false;
@@ -196,7 +196,7 @@ namespace AntFu7.LiveDraw
             }
             else
             {
-                SetStaticInfo("Locked");
+                SetStaticInfo("Disengaged");
                 MainInkCanvas.EditingMode = InkCanvasEditingMode.None; //No inking possible
             }
         }
@@ -250,6 +250,11 @@ namespace AntFu7.LiveDraw
             }
         }
 
+        internal void ToggleEngaged()
+        {
+            this.SetEngaged(!_engaged);
+        }
+
         private void SetBrushSize(double s)
         {
             if (MainInkCanvas.EditingMode == InkCanvasEditingMode.EraseByPoint)
@@ -279,7 +284,7 @@ namespace AntFu7.LiveDraw
             }
             else
             {
-                SetEnable(_enable);
+                SetEngaged(_engaged);
             }
         }
         private void SetOrientation(bool v)
@@ -602,7 +607,7 @@ namespace AntFu7.LiveDraw
         }
         private void EraserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_enable)
+            if (_engaged)
             {
                 EraserFunction();
             }
@@ -707,9 +712,9 @@ namespace AntFu7.LiveDraw
         {
             SetInkVisibility(!_inkVisibility);
         }
-        private void EnableButton_Click(object sender, RoutedEventArgs e)
+        private void EngageButton_Click(object sender, RoutedEventArgs e)
         {
-            SetEnable(!_enable);
+            SetEngaged(!_engaged);
             if (_eraserMode)
             {
                 SetEraserMode(!_eraserMode);
@@ -800,14 +805,14 @@ namespace AntFu7.LiveDraw
             _lastMousePosition = Mouse.GetPosition(this);
             _isDraging = true;
             Palette.Background = new SolidColorBrush(Colors.Transparent);
-            _tempEnable = _enable;
-            SetEnable(true);
+            _tempEnable = _engaged;
+            SetEngaged(true);
         }
         private void EndDrag()
         {
             if (_isDraging == true)
             {
-                SetEnable(_tempEnable);
+                SetEngaged(_tempEnable);
             }
             _isDraging = false;
             Palette.Background = null;
@@ -842,9 +847,9 @@ namespace AntFu7.LiveDraw
         {
             if (e.Key == Key.R)
             {
-                SetEnable(!_enable);
+                SetEngaged(!_engaged);
             }
-            if (!_enable)
+            if (!_engaged)
                 return;
 
             switch (e.Key)
@@ -861,7 +866,7 @@ namespace AntFu7.LiveDraw
                 case Key.B:
                     if (_eraserMode == true)
                         SetEraserMode(false);
-                    SetEnable(true);
+                    SetEngaged(true);
                     break;
                 case Key.L:
                     if (_eraserMode == true)
@@ -908,7 +913,7 @@ namespace AntFu7.LiveDraw
 
         private void LineMode(bool l)
         {
-            if (_enable)
+            if (_engaged)
             {
 
                 _lineMode = l;
@@ -925,7 +930,7 @@ namespace AntFu7.LiveDraw
                 }
                 else
                 {
-                    SetEnable(true);
+                    SetEngaged(true);
                 }
             }
         }

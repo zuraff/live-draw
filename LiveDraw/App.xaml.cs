@@ -93,5 +93,10 @@ namespace LiveDraw
         {
             this.InvokeMainWindow(w => w.PreviousColor());
         }
+
+        public void ToggleEngage()
+        {
+            this.InvokeMainWindow(w => w.ToggleEngaged());
+        }
     }
 }

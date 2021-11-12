@@ -39,5 +39,10 @@ namespace LiveDraw.Controllers
             _liveDraw.PreviousColor();
         }
 
+        [HttpPost("engage/toggle")]
+        public void PostEngageToggle()
+        {
+            _liveDraw.ToggleEngage();
+        }
     }
 }

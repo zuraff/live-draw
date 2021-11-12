@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).exe&quot; &quot;$(SolutionDir)LiveDraw\color_next.exe&quot;&#xD;&#xA;copy /Y &quot;$(TargetDir)$(ProjectName).exe&quot; &quot;$(SolutionDir)LiveDraw\color_previous.exe&quot;" />
+    <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).exe&quot; &quot;$(SolutionDir)LiveDraw\color_next.exe&quot;&#xD;&#xA;copy /Y &quot;$(TargetDir)$(ProjectName).exe&quot; &quot;$(SolutionDir)LiveDraw\color_previous.exe&quot;&#xD;&#xA;copy /Y &quot;$(TargetDir)$(ProjectName).exe&quot; &quot;$(SolutionDir)LiveDraw\engage_toggle.exe&quot;" />
   </Target>
 
 </Project>
