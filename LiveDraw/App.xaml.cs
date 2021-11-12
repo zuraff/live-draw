@@ -13,38 +13,12 @@ using System.Windows;
 
 namespace LiveDraw
 {
-    public interface ILiveDraw
-    {
-        public string GetSelectedColor();
-        void NextColor();
-    }
 
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application, ILiveDraw
     {
-        public string GetSelectedColor()
-        {
-            string color = string.Empty;
-            this.Dispatcher.Invoke(() =>
-            {
-                var window = (AntFu7.LiveDraw.MainWindow)this.MainWindow;
-                color = window.GetSelectedColor().ToString();
-            });
-
-            return color;
-        }
-
-        public void NextColor()
-        {
-            this.Dispatcher.Invoke(() =>
-            {
-                var window = (AntFu7.LiveDraw.MainWindow)this.MainWindow;
-                window.NextColor();
-            });
-        }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -89,6 +63,35 @@ namespace LiveDraw
             thread.Start();            
         }
 
+        private void InvokeMainWindow(Action<AntFu7.LiveDraw.MainWindow> action)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                var window = (AntFu7.LiveDraw.MainWindow)this.MainWindow;
+                action(window);
+            });
+        }
         
+        public string GetSelectedColor()
+        {
+            string color = string.Empty;
+            this.Dispatcher.Invoke(() =>
+            {
+                var window = (AntFu7.LiveDraw.MainWindow)this.MainWindow;
+                color = window.GetSelectedColor().ToString();
+            });
+
+            return color;
+        }
+
+        public void NextColor()
+        {
+            this.InvokeMainWindow(w => w.NextColor());
+        }
+
+        public void PreviousColor()
+        {
+            this.InvokeMainWindow(w => w.PreviousColor());
+        }
     }
 }

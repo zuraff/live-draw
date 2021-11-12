@@ -97,6 +97,7 @@ namespace AntFu7.LiveDraw
                 Application.Current.Shutdown(0);
             }
         }
+              
 
         private void Exit(object sender, EventArgs e)
         {
@@ -232,6 +233,20 @@ namespace AntFu7.LiveDraw
             else
             {
                 SetColor(colorPickers.First());
+            }
+        }
+
+        internal void PreviousColor()
+        {
+            var colorPickers = this.FindChildren<ColorPicker>().ToList();
+            var remaining = colorPickers.TakeWhile(p => !object.ReferenceEquals(p, _selectedColor));
+            if (remaining.Any())
+            {
+                SetColor(remaining.Last());
+            }
+            else
+            {
+                SetColor(colorPickers.Last());
             }
         }
 

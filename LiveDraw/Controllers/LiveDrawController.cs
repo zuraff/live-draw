@@ -33,5 +33,11 @@ namespace LiveDraw.Controllers
             _liveDraw.NextColor();
         }
 
+        [HttpPost("color/previous")]
+        public void PostColorPrevious()
+        {
+            _liveDraw.PreviousColor();
+        }
+
     }
 }
