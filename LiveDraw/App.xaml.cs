@@ -13,11 +13,28 @@ using System.Windows;
 
 namespace LiveDraw
 {
+    public interface ILiveDraw
+    {
+        public string GetSelectedColor();
+    }
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : Application, ILiveDraw
     {
+        public string GetSelectedColor()
+        {
+            string color = string.Empty;
+            this.Dispatcher.Invoke(() =>
+            {
+                var window = (AntFu7.LiveDraw.MainWindow)this.MainWindow;
+                color = window.GetSelectedColor().ToString();
+            });
+
+            return color;
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -26,7 +43,9 @@ namespace LiveDraw
 
             // Add services to the container.
 
+            builder.Services.AddSingleton<ILiveDraw>(this);
             builder.Services.AddControllers();
+            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -57,7 +76,9 @@ namespace LiveDraw
             app.MapControllers();
 
             var thread = new Thread(() => app.Run());
-            thread.Start();
+            thread.Start();            
         }
+
+        
     }
 }

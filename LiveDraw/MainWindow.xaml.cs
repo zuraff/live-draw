@@ -214,6 +214,13 @@ namespace AntFu7.LiveDraw
                 _selectedColor.IsActived = false;
             _selectedColor = b;
         }
+
+        internal System.Windows.Media.Color GetSelectedColor()
+        {
+            var brush = _selectedColor.Background as SolidColorBrush;
+            return brush.Color;
+        }
+
         private void SetBrushSize(double s)
         {
             if (MainInkCanvas.EditingMode == InkCanvasEditingMode.EraseByPoint)
