@@ -9,6 +9,27 @@ namespace LiveDraw.Client
         [STAThread]
         static async Task Main()
         {
+            try
+            {
+                if (!Process.GetProcessesByName("LiveDraw").Any())
+                {
+                    var assembly = Assembly.GetExecutingAssembly();
+                    var dir = Path.GetDirectoryName(assembly.Location);
+                    var liveDraw = Path.Combine(dir, "LiveDraw.exe");
+                    var info = new ProcessStartInfo(liveDraw);
+                    info.WorkingDirectory = dir;
+                    info.UseShellExecute = false;
+                    Process.Start(info);
+
+                    // TODO: wait until started
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to start LiveDraw.\r\n{ex.Message}");
+            }
+
             HttpClient client = new HttpClient(new HttpClientHandler { UseDefaultCredentials = true });
             client.BaseAddress = new Uri("https://localhost:5001/");
 
@@ -19,7 +40,7 @@ namespace LiveDraw.Client
                 var endpoint = "LiveDraw/" + post;
                 var op = $"POST to {client.BaseAddress}{endpoint}";
 
-                MessageBox.Show(op);
+                // MessageBox.Show(op);
 
                 var identity = WindowsIdentity.GetCurrent();
                 await WindowsIdentity.RunImpersonated(identity.AccessToken, async () =>

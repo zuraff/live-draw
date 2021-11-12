@@ -13,9 +13,9 @@ namespace LiveDraw.Controllers
     public class LiveDrawController : ControllerBase
     {
         private readonly ILiveDraw _liveDraw;
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<LiveDrawController> _logger;
 
-        public LiveDrawController(ILiveDraw liveDraw, ILogger<WeatherForecastController> logger)
+        public LiveDrawController(ILiveDraw liveDraw, ILogger<LiveDrawController> logger)
         {
             _liveDraw = liveDraw;
             _logger = logger;
