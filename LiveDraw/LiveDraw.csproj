@@ -34,6 +34,9 @@
     <Page Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LiveDraw.Client\LiveDraw.Client.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Rescoures\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +51,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="color_next.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
