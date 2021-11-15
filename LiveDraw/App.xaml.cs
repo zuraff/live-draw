@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.AspNetCore.Hosting;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LiveDraw
 {
@@ -21,9 +23,13 @@ namespace LiveDraw
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            X509Certificate c = new X509Certificate();
+
             base.OnStartup(e);
 
             var builder = WebApplication.CreateBuilder(new string[] { });
+
+            
 
             // Add services to the container.
 
@@ -33,7 +39,7 @@ namespace LiveDraw
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            
             builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
                .AddNegotiate();
 
@@ -43,7 +49,10 @@ namespace LiveDraw
                 options.FallbackPolicy = options.DefaultPolicy;
             });
 
+
             var app = builder.Build();
+            
+
 
             // Configure the HTTP request pipeline.
             // if (app.Environment.IsDevelopment())

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 
 namespace LiveDraw.Client
@@ -9,12 +10,16 @@ namespace LiveDraw.Client
         [STAThread]
         static async Task Main()
         {
+            //System.Diagnostics.Debugger.Launch();
+            //System.Diagnostics.Debugger.Break();
+
+            var assembly = Assembly.GetExecutingAssembly();
+            var dir = Path.GetDirectoryName(assembly.Location);
+
             try
             {
                 if (!Process.GetProcessesByName("LiveDraw").Any())
                 {
-                    var assembly = Assembly.GetExecutingAssembly();
-                    var dir = Path.GetDirectoryName(assembly.Location);
                     var liveDraw = Path.Combine(dir, "LiveDraw.exe");
                     var info = new ProcessStartInfo(liveDraw);
                     info.WorkingDirectory = dir;
@@ -29,8 +34,19 @@ namespace LiveDraw.Client
             {
                 MessageBox.Show($"Failed to start LiveDraw.\r\n{ex.Message}");
             }
+                        
+            X509Certificate2 serverCertificate = new X509Certificate2(Path.Combine(dir, "livedraw.pfx"), "livedraw");                       
 
-            HttpClient client = new HttpClient(new HttpClientHandler { UseDefaultCredentials = true });
+            var handler = new HttpClientHandler { 
+                UseDefaultCredentials = true,
+                ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) =>
+                {
+                    return cert?.Thumbprint == serverCertificate.Thumbprint;
+                }
+            };
+            var client = new HttpClient(handler);
+
+           
             client.BaseAddress = new Uri("https://localhost:5001/");
 
             var name = Process.GetCurrentProcess().ProcessName;
