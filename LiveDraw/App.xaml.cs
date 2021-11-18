@@ -1,17 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.AspNetCore.Hosting;
-using System.Security.Cryptography.X509Certificates;
 
 namespace LiveDraw
 {
@@ -23,8 +15,6 @@ namespace LiveDraw
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            X509Certificate c = new X509Certificate();
-
             base.OnStartup(e);
 
             var builder = WebApplication.CreateBuilder(new string[] { });

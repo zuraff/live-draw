@@ -34,9 +34,6 @@
     <Page Include="App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LiveDraw.Client\LiveDraw.Client.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Rescoures\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -54,16 +51,7 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="clear.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="color_next.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="color_previous.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="engage_toggle.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="livedraw.pfx">
